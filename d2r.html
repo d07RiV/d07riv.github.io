@@ -1,0 +1,583 @@
+<html>
+<head>
+<script>
+const savebits = [8,7,7,7,0,0,0,9,0,8,0,8,0,0,0,0,9,9,9,10,6,6,7,6,7,8,8,8,8,0,0,11,9,8,6,6,8,8,5,8,5,8,5,8,5,8,5,0,8,9,6,10,8,9,8,9,8,10,10,9,7,0,7,0,0,0,0,7,7,0,0,8,9,8,6,7,6,6,7,9,8,7,9,3,0,9,7,7,1,4,24,8,7,7,7,0,7,6,1,7,0,0,7,0,0,7,0,3,1,9,8,9,7,7,6,1,7,7,1,9,7,9,9,10,10,1,3,3,5,0,0,0,0,0,5,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,5,1,1,7,7,7,7,7,6,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,3,0,0,0,0,0,0,3,0,0,0,0,0,4,7,7,7,7,7,0,7,0,0,16,0,0,0,0,0,0,0,0,0,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,5,6,6,6,6,6,6,6,6,6,6,6,6,0,6,6,8,0,0,0,0,0,0,0,0,0,0,0,0,0,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,0,8,8,8,8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6,0,0,0,0,9,9,9,9,8,8,8,8,8,7,7,7,8,8,8,8,8,8,8,8,8,0,0,0,0,0,0,2,9,8];
+const saveparambits = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,9,8,0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,10,10,0,0,0,0,0,0,0,16,0,0,0,0,0,0,16,16,16,16,16,0,16,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+const csvbits = [10,10,10,10,10,8,21,21,21,21,21,21,7,32,25,25];
+const followstats = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,2,0,0,2];
+const itemBases = {"cap":4,"skp":4,"hlm":4,"fhl":4,"ghm":4,"crn":4,"msk":4,"qui":4,"lea":4,"hla":4,"stu":4,"rng":4,"scl":4,"chn":4,"brs":4,"spl":4,"plt":4,"fld":4,"gth":4,"ful":4,"aar":4,"ltp":4,"buc":4,"sml":4,"lrg":4,"kit":4,"tow":4,"gts":4,"lgl":4,"vgl":4,"mgl":4,"tgl":4,"hgl":4,"lbt":4,"vbt":4,"mbt":4,"tbt":4,"hbt":4,"lbl":4,"vbl":4,"mbl":4,"tbl":4,"hbl":4,"bhm":4,"bsh":4,"spk":4,"xap":4,"xkp":4,"xlm":4,"xhl":4,"xhm":4,"xrn":4,"xsk":4,"xui":4,"xea":4,"xla":4,"xtu":4,"xng":4,"xcl":4,"xhn":4,"xrs":4,"xpl":4,"xlt":4,"xld":4,"xth":4,"xul":4,"xar":4,"xtp":4,"xuc":4,"xml":4,"xrg":4,"xit":4,"xow":4,"xts":4,"xlg":4,"xvg":4,"xmg":4,"xtg":4,"xhg":4,"xlb":4,"xvb":4,"xmb":4,"xtb":4,"xhb":4,"zlb":4,"zvb":4,"zmb":4,"ztb":4,"zhb":4,"xh9":4,"xsh":4,"xpk":4,"dr1":4,"dr2":4,"dr3":4,"dr4":4,"dr5":4,"ba1":4,"ba2":4,"ba3":4,"ba4":4,"ba5":4,"pa1":4,"pa2":4,"pa3":4,"pa4":4,"pa5":4,"ne1":4,"ne2":4,"ne3":4,"ne4":4,"ne5":4,"ci0":4,"ci1":4,"ci2":4,"ci3":4,"uap":4,"ukp":4,"ulm":4,"uhl":4,"uhm":4,"urn":4,"usk":4,"uui":4,"uea":4,"ula":4,"utu":4,"ung":4,"ucl":4,"uhn":4,"urs":4,"upl":4,"ult":4,"uld":4,"uth":4,"uul":4,"uar":4,"utp":4,"uuc":4,"uml":4,"urg":4,"uit":4,"uow":4,"uts":4,"ulg":4,"uvg":4,"umg":4,"utg":4,"uhg":4,"ulb":4,"uvb":4,"umb":4,"utb":4,"uhb":4,"ulc":4,"uvc":4,"umc":4,"utc":4,"uhc":4,"uh9":4,"ush":4,"upk":4,"dr6":4,"dr7":4,"dr8":4,"dr9":4,"dra":4,"ba6":4,"ba7":4,"ba8":4,"ba9":4,"baa":4,"pa6":4,"pa7":4,"pa8":4,"pa9":4,"paa":4,"ne6":4,"ne7":4,"ne8":4,"ne9":4,"nea":4,"drb":4,"drc":4,"drd":4,"dre":4,"drf":4,"bab":4,"bac":4,"bad":4,"bae":4,"baf":4,"pab":4,"pac":4,"pad":4,"pae":4,"paf":4,"neb":4,"neg":4,"ned":4,"nee":4,"nef":4,"elx":0,"hpo":0,"mpo":0,"hpf":0,"mpf":0,"vps":0,"yps":0,"rvs":0,"rvl":0,"wms":0,"tbk":9,"ibk":9,"amu":0,"vip":0,"rin":0,"gld":1,"bks":0,"bkd":0,"aqv":1,"tch":0,"cqv":1,"tsc":0,"isc":0,"hrt":0,"brz":0,"jaw":0,"eyz":0,"hrn":0,"tal":0,"flg":0,"fng":0,"qll":0,"sol":0,"scz":0,"spe":0,"key":1,"luv":0,"xyz":0,"j34":0,"g34":0,"bbb":0,"box":0,"tr1":0,"mss":0,"ass":0,"qey":0,"qhr":0,"qbr":0,"ear":0,"gcv":0,"gfv":0,"gsv":0,"gzv":0,"gpv":0,"gcy":0,"gfy":0,"gsy":0,"gly":0,"gpy":0,"gcb":0,"gfb":0,"gsb":0,"glb":0,"gpb":0,"gcg":0,"gfg":0,"gsg":0,"glg":0,"gpg":0,"gcr":0,"gfr":0,"gsr":0,"glr":0,"gpr":0,"gcw":0,"gfw":0,"gsw":0,"glw":0,"gpw":0,"hp1":0,"hp2":0,"hp3":0,"hp4":0,"hp5":0,"mp1":0,"mp2":0,"mp3":0,"mp4":0,"mp5":0,"skc":0,"skf":0,"sku":0,"skl":0,"skz":0,"hrb":0,"cm1":0,"cm2":0,"cm3":0,"rps":1,"rpl":1,"bps":1,"bpl":1,"r01":0,"r02":0,"r03":0,"r04":0,"r05":0,"r06":0,"r07":0,"r08":0,"r09":0,"r10":0,"r11":0,"r12":0,"r13":0,"r14":0,"r15":0,"r16":0,"r17":0,"r18":0,"r19":0,"r20":0,"r21":0,"r22":0,"r23":0,"r24":0,"r25":0,"r26":0,"r27":0,"r28":0,"r29":0,"r30":0,"r31":0,"r32":0,"r33":0,"jew":0,"ice":0,"0sc":0,"tr2":0,"pk1":0,"pk2":0,"pk3":0,"dhn":0,"bey":0,"mbr":0,"toa":0,"tes":0,"ceh":0,"bet":0,"fed":0,"std":0,"hax":2,"axe":2,"2ax":2,"mpi":2,"wax":2,"lax":2,"bax":2,"btx":2,"gax":2,"gix":2,"wnd":2,"ywn":2,"bwn":2,"gwn":2,"clb":2,"scp":2,"gsc":2,"wsp":2,"spc":2,"mac":2,"mst":2,"fla":2,"whm":2,"mau":2,"gma":2,"ssd":2,"scm":2,"sbr":2,"flc":2,"crs":2,"bsd":2,"lsd":2,"wsd":2,"2hs":2,"clm":2,"gis":2,"bsw":2,"flb":2,"gsd":2,"dgr":2,"dir":2,"kri":2,"bld":2,"tkf":3,"tax":3,"bkf":3,"bal":3,"jav":3,"pil":3,"ssp":3,"glv":3,"tsp":3,"spr":2,"tri":2,"brn":2,"spt":2,"pik":2,"bar":2,"vou":2,"scy":2,"pax":2,"hal":2,"wsc":2,"sst":2,"lst":2,"cst":2,"bst":2,"wst":2,"sbw":2,"hbw":2,"lbw":2,"cbw":2,"sbb":2,"lbb":2,"swb":2,"lwb":2,"lxb":2,"mxb":2,"hxb":2,"rxb":2,"gps":3,"ops":3,"gpm":3,"opm":3,"gpl":3,"opl":3,"d33":2,"g33":2,"leg":2,"hdm":2,"hfh":2,"hst":2,"msf":2,"9ha":2,"9ax":2,"92a":2,"9mp":2,"9wa":2,"9la":2,"9ba":2,"9bt":2,"9ga":2,"9gi":2,"9wn":2,"9yw":2,"9bw":2,"9gw":2,"9cl":2,"9sc":2,"9qs":2,"9ws":2,"9sp":2,"9ma":2,"9mt":2,"9fl":2,"9wh":2,"9m9":2,"9gm":2,"9ss":2,"9sm":2,"9sb":2,"9fc":2,"9cr":2,"9bs":2,"9ls":2,"9wd":2,"92h":2,"9cm":2,"9gs":2,"9b9":2,"9fb":2,"9gd":2,"9dg":2,"9di":2,"9kr":2,"9bl":2,"9tk":3,"9ta":3,"9bk":3,"9b8":3,"9ja":3,"9pi":3,"9s9":3,"9gl":3,"9ts":3,"9sr":2,"9tr":2,"9br":2,"9st":2,"9p9":2,"9b7":2,"9vo":2,"9s8":2,"9pa":2,"9h9":2,"9wc":2,"8ss":2,"8ls":2,"8cs":2,"8bs":2,"8ws":2,"8sb":2,"8hb":2,"8lb":2,"8cb":2,"8s8":2,"8l8":2,"8sw":2,"8lw":2,"8lx":2,"8mx":2,"8hx":2,"8rx":2,"qf1":2,"qf2":2,"ktr":2,"wrb":2,"axf":2,"ces":2,"clw":2,"btl":2,"skr":2,"9ar":2,"9wb":2,"9xf":2,"9cs":2,"9lw":2,"9tw":2,"9qr":2,"7ar":2,"7wb":2,"7xf":2,"7cs":2,"7lw":2,"7tw":2,"7qr":2,"7ha":2,"7ax":2,"72a":2,"7mp":2,"7wa":2,"7la":2,"7ba":2,"7bt":2,"7ga":2,"7gi":2,"7wn":2,"7yw":2,"7bw":2,"7gw":2,"7cl":2,"7sc":2,"7qs":2,"7ws":2,"7sp":2,"7ma":2,"7mt":2,"7fl":2,"7wh":2,"7m7":2,"7gm":2,"7ss":2,"7sm":2,"7sb":2,"7fc":2,"7cr":2,"7bs":2,"7ls":2,"7wd":2,"72h":2,"7cm":2,"7gs":2,"7b7":2,"7fb":2,"7gd":2,"7dg":2,"7di":2,"7kr":2,"7bl":2,"7tk":3,"7ta":3,"7bk":3,"7b8":3,"7ja":3,"7pi":3,"7s7":3,"7gl":3,"7ts":3,"7sr":2,"7tr":2,"7br":2,"7st":2,"7p7":2,"7o7":2,"7vo":2,"7s8":2,"7pa":2,"7h7":2,"7wc":2,"6ss":2,"6ls":2,"6cs":2,"6bs":2,"6ws":2,"6sb":2,"6hb":2,"6lb":2,"6cb":2,"6s7":2,"6l7":2,"6sw":2,"6lw":2,"6lx":2,"6mx":2,"6hx":2,"6rx":2,"ob1":2,"ob2":2,"ob3":2,"ob4":2,"ob5":2,"am1":2,"am2":2,"am3":2,"am4":2,"am5":3,"ob6":2,"ob7":2,"ob8":2,"ob9":2,"oba":2,"am6":2,"am7":2,"am8":2,"am9":2,"ama":3,"obb":2,"obc":2,"obd":2,"obe":2,"obf":2,"amb":2,"amc":2,"amd":2,"ame":2,"amf":3};
+const quests = [1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,128,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,128,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,128,0,0,0,0,0,0,0,0,0,0,0,0];
+
+const huffman = [[[[["w","u"],[["8",["y",["5",["j",[]]]]],"h"]],["s",[["2","n"],"x"]]],[[["c",["k","f"]],"b"],[["t","m"],["9","7"]]]],[" ",[[[["e","d"],"p"],["g",[[["z","q"],"3"],["v","6"]]]],[["r","l"],["a",[["1",["4","0"]],["i","o"]]]]]]];
+const huffmanW = {};
+function dotree(node, prefix) {
+  if (Array.isArray(node)) {
+    dotree(node[0], prefix + '0');
+    dotree(node[1], prefix + '1');
+  } else if (node) {
+    huffmanW[node] = prefix;
+  }
+}
+dotree(huffman, '');
+
+class BinaryReader {
+  bitpos = 0;
+  constructor(buffer) {
+    this.buffer = buffer;
+  }
+
+  // aligned, does not check
+  read8() {
+    const value = this.buffer[this.bitpos >> 3];
+    this.bitpos += 8;
+    return value;
+  }
+  read16() {
+    const idx = this.bitpos >> 3;
+    const value1 = this.buffer[idx];
+    const value2 = this.buffer[idx + 1];
+    this.bitpos += 16;
+    return value1 | (value2 << 8);
+  }
+  read32() {
+    const idx = this.bitpos >> 3;
+    const value1 = this.buffer[idx];
+    const value2 = this.buffer[idx + 1];
+    const value3 = this.buffer[idx + 2];
+    const value4 = this.buffer[idx + 3];
+    this.bitpos += 32;
+    return (value1 | (value2 << 8) | (value3 << 16) | (value4 << 24)) >>> 0;
+  }
+  byte(offset) {
+    return this.buffer[(this.bitpos >> 3) + offset];
+  }
+  string(length) {
+    const end = (this.bitpos >> 3) + length;
+    let index = this.buffer.indexOf(0, this.bitpos >> 3);
+    if (index < 0) index = length;
+    else index = Math.min(index, end);
+    const result = String.fromCharCode(...this.buffer.subarray(this.bitpos >> 3, index));
+    this.bitpos = end << 3;
+    return result;
+  }
+
+  seek(pos) {
+    this.bitpos = pos << 3;
+  }
+  skip(bytes) {
+    this.bitpos += bytes << 3;
+  }
+
+  align() {
+    this.bitpos = (this.bitpos + 7) & (~7);
+  }
+
+  bits(count) {
+    let result = 0;
+    let shift = 0;
+    while (count) {
+      const byte = this.bitpos >> 3;
+      const bit = this.bitpos & 7;
+      const read = Math.min(count, 8 - bit);
+      const value = (this.buffer[byte] >> bit) & ((1 << read) - 1);
+      result |= value << shift;
+      shift += read;
+      count -= read;
+      this.bitpos += read;
+    }
+    return result;
+  }
+  bit() {
+    const result = (this.buffer[this.bitpos >> 3] >> (this.bitpos & 7)) & 1;
+    this.bitpos += 1;
+    return result;
+  }
+  skipbits(count) {
+    this.bitpos += count;
+  }
+
+  char() {
+    let node = huffman;
+    while (Array.isArray(node)) {
+      node = node[this.bit()];
+    }
+    return node;
+  }
+  
+  eof() {
+    return this.bitpos === this.buffer.byteLength * 8;
+  }
+}
+
+class BinaryWriter {
+  bitpos = 0;
+  constructor() {
+    this.buffer = new Uint8Array(65536);
+  }
+
+  // aligned, does not check
+  write8(value) {
+    this.buffer[this.bitpos >> 3] = value;
+    this.bitpos += 8;
+  }
+  write16(value) {
+    const idx = this.bitpos >> 3;
+    this.buffer[idx] = value;
+    this.buffer[idx + 1] = value >> 8;
+    this.bitpos += 16;
+  }
+  write32(value) {
+    const idx = this.bitpos >> 3;
+    this.buffer[idx] = value;
+    this.buffer[idx + 1] = value >> 8;
+    this.buffer[idx + 2] = value >> 16;
+    this.buffer[idx + 3] = value >> 24;
+    this.bitpos += 32;
+  }
+  string(str, length) {
+    for (let i = 0; i < str.length; ++i) {
+      this.write8(str.charCodeAt(i));
+    }
+    for (let i = str.length; i < length; ++i) {
+      this.write8(0);
+    }
+  }
+
+  seek(pos) {
+    this.bitpos = pos << 3;
+  }
+  skip(bytes) {
+    this.bitpos += bytes << 3;
+  }
+
+  align() {
+    this.bitpos = (this.bitpos + 7) & (~7);
+  }
+
+  bits(value, count) {
+    let shift = 0;
+    while (count) {
+      const byte = this.bitpos >> 3;
+      const bit = this.bitpos & 7;
+      const write = Math.min(count, 8 - bit);
+      this.buffer[byte] |= ((value >> shift) & ((1 << write) - 1)) << bit;
+      shift += write;
+      count -= write;
+      this.bitpos += write;
+    }
+  }
+  bit(value) {
+    this.buffer[this.bitpos >> 3] |= ((value & 1) << (this.bitpos & 7));
+    this.bitpos += 1;
+  }
+  skipbits(count) {
+    this.bitpos += count;
+  }
+
+  char(chr) {
+    const str = huffmanW[chr];
+    for (let i = 0; i < str.length; ++i) {
+      this.bit(str[i] === '1' ? 1 : 0);
+    }
+  }
+
+  finish() {
+    return this.buffer.subarray(0, this.bitpos >> 3);
+  }
+}
+
+function checksum(buf) {
+  let result = 0;
+  for (let i = 0; i < buf.length; ++i) {
+    result = (result << 1) | (result >>> 31);
+    result += buf[i];
+  }
+  return result;
+}
+
+function parseCharacter(rawInput) {
+  const src = new BinaryReader(new Uint8Array(rawInput));
+  const dst = new BinaryWriter();
+  function copy8() {
+    const value = src.read8();
+    dst.write8(value);
+    return value;
+  }
+  function copy16() {
+    const value = src.read16();
+    dst.write16(value);
+    return value;
+  }
+  function copy32() {
+    const value = src.read32();
+    dst.write32(value);
+    return value;
+  }
+  function skip(bytes) {
+    for (let i = 0; i < bytes; ++i) {
+      copy8();
+    }
+  }
+  function copybits(count) {
+    const value = src.bits(count);
+    dst.bits(value, count);
+    return value;
+  }
+  function skipbits(count) {
+    while (count >= 16) {
+      copybits(16);
+      count -= 16;
+    }
+    if (count) copybits(count);
+  }
+  function align() {
+    src.align();
+    dst.align();
+  }
+
+  if (copy32() !== 0xaa55aa55) throw Error('invalid header');
+  const version = src.read32();
+  if (version !== 96 && version !== 97) throw Error('unsupported version');
+  const D2R = (version === 97);
+  dst.write32(D2R ? 96 : 97);
+
+  skip(179 - 8);
+  const mercId = copy32();
+  skip(765 - 183);
+
+  if (copy16() !== 0x6667) throw Error('invalid stats header');
+
+  while (true) {
+    const id = copybits(9);
+    if (id === 511) break;
+    if (!csvbits[id]) throw Error(`unknown stat code ${id}`);
+    copybits(csvbits[id]);
+  }
+
+  align();
+
+  if (copy16() !== 0x6669) throw Error('invalid skills header');
+  skip(30);
+
+  function parseItem() {
+    if (!D2R && src.read16() !== 0x4d4a) throw Error('invalid item header'); // D2R
+    if (D2R) dst.write16(0x4d4a);
+
+    skipbits(4);
+    skipbits(1);
+    skipbits(6);
+    const socketed = copybits(1);
+    skipbits(4);
+    const ear = copybits(1);
+    skipbits(4);
+    const simple = copybits(1);
+    skipbits(2);
+    const personalized = copybits(1);
+    skipbits(1);
+    const runeword = copybits(1);
+    if (D2R) {
+      src.skipbits(8);
+      dst.bits(0x0CA0, 15);
+    } else {
+      src.skipbits(15);
+      dst.bits(0xA0, 8);
+    }
+    skipbits(3); // location
+    skipbits(4); // bodyloc
+    skipbits(4); // invcol
+    skipbits(3); // invrow
+    skipbits(1);
+    skipbits(3); // storage
+
+    let baseId;
+    if (D2R) {
+      const basea = src.char();
+      const baseb = src.char();
+      const basec = src.char();
+      const based = src.char();
+      if (based !== ' ') throw Error(`invalid item code`);
+      baseId = basea + baseb + basec;
+    } else {
+      const basea = src.bits(8);
+      const baseb = src.bits(8);
+      const basec = src.bits(8);
+      const based = src.bits(8);
+      if (based !== 32) throw Error(`invalid item code ${src.bitpos / 8}`);
+      baseId = String.fromCharCode(basea, baseb, basec);
+    }
+    for (let i = 0; i < 4; ++i) {
+      if (D2R) {
+        dst.bits(baseId.charCodeAt(i) || 32);
+      } else {
+        dst.char(baseId[i] || ' ');
+      }
+    }
+
+    const base = itemBases[baseId];
+
+    if (base == null) throw Error(`invalid item code ${baseId}`);
+
+    if (ear) {
+      skipbits(10);
+      while (copybits(7)) {
+        // do nothing
+      }
+      align();
+      return;
+    }
+
+    const socketedItems = copybits(simple ? 1 : 3);
+
+    if (!simple) {
+      skipbits(32);
+      skipbits(7); // ilvl
+      const quality = copybits(4);
+      if (copybits(1)) {
+        skipbits(3);
+      }
+
+      if (copybits(1)) {
+        skipbits(11);
+      }
+
+      switch (quality) {
+      case 1:
+        skipbits(3);
+        break;
+      case 2:
+        // 12 bits here sometimes?
+        break;
+      case 3:
+        skipbits(3);
+        break;
+      case 4:
+        skipbits(11);
+        skipbits(11);
+        break;
+      case 5:
+        skipbits(12);
+        break;
+      case 7:
+        skipbits(12);
+        break;
+      case 6:
+      case 8:
+        skipbits(8);
+        skipbits(8);
+        if (copybits(1)) skipbits(11);
+        if (copybits(1)) skipbits(11);
+        if (copybits(1)) skipbits(11);
+        if (copybits(1)) skipbits(11);
+        if (copybits(1)) skipbits(11);
+        if (copybits(1)) skipbits(11);
+        break;
+      // no default
+      }
+
+      if (runeword) {
+        skipbits(16);
+      }
+
+      if (personalized) {
+        while (copybits(7)) {
+          ;
+        }
+      }
+
+      if (base & 8) {
+        skipbits(5);
+      }
+
+      if (copybits(1)) {
+        skipbits(96);
+      }
+
+      if (base & 4) {
+        skipbits(11);
+      }
+
+      if (base & 6) {
+        // durability
+        if (copybits(8)) skipbits(9);
+      }
+      if (base & 1) skipbits(9);
+      if (socketed) skipbits(4);
+
+      const setflags = (quality === 5 ? copybits(5) : 0);
+
+      function parseStats(ignore) {
+        while (true) {
+          let id = copybits(9);
+          if (id === 511) break;
+          if (!savebits[id]) throw Error(`unknown stat code ${id}`);
+          skipbits(saveparambits[id]);
+          skipbits(savebits[id]);
+
+          let follow = followstats[id] || 0;
+          while (follow--) {
+            id += 1;
+            skipbits(saveparambits[id] || 0);
+            skipbits(savebits[id] || 0);
+          }
+        }
+      }
+      parseStats();
+      if (setflags & 1) parseStats(true);
+      if (setflags & 2) parseStats(true);
+      if (setflags & 4) parseStats(true);
+      if (setflags & 8) parseStats(true);
+      if (setflags & 16) parseStats(true);
+      if (runeword) parseStats();
+    }
+
+    align();
+
+    for (let i = 0; i < socketedItems; ++i) {
+      parseItem();
+    }
+  }
+
+  function parseItemList() {
+    if (copy16() !== 0x4d4a) throw Error('invalid item table header');
+    const count = copy16();
+    for (let i = 0; i < count; ++i) {
+      parseItem();
+    }
+  }
+
+  parseItemList(); // character items
+
+  //console.log('corpses', (src.bitpos / 8).toString(16), (dst.bitpos / 8).toString(16));
+  if (copy16() !== 0x4d4a) throw Error('invalid item table header');
+  const corpses = copy16();
+  skip(corpses * 12);
+  for (let i = 0; i < corpses; ++i) {
+    parseItemList(); // corpses
+  }
+
+  if (copy16() !== 0x666a) throw Error('invalid hireling header');
+  if (mercId) {
+    parseItemList();
+  }
+
+  if (copy16() !== 0x666b) throw Error('invalid iron golem header');
+  if (copy8()) {
+    parseItem();
+  }
+
+  if (!src.eof()) throw Error('file too long');
+
+  const length = dst.bitpos >> 3;
+  dst.seek(8);
+  dst.write32(length);
+  dst.write32(0);
+  //dst.buffer.set(quests, 345);
+  //dst.buffer[0x24] |= 0x40;
+  dst.buffer[0x14B] = 1;
+
+  const result = dst.buffer.subarray(0, length);
+  const cs = checksum(result);
+  dst.seek(12);
+  dst.write32(cs);
+
+  return {result, d2r: D2R};
+}
+
+const readFile = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = () => reject(reader.error);
+  reader.onabort = () => reject();
+  reader.readAsArrayBuffer(file);
+});
+
+function getDropFile(e) {
+  if (e.dataTransfer.items) {
+    for (let i = 0; i < e.dataTransfer.items.length; ++i) {
+      if (e.dataTransfer.items[i].kind === "file") {
+        return e.dataTransfer.items[i].getAsFile();
+      }
+    }
+  } if (e.dataTransfer.files.length) {
+    return e.dataTransfer.files[0];
+  }
+}
+
+async function process(file) {
+  const data = await readFile(file);
+  let result, text;
+  try {
+    const res = parseCharacter(data);
+    result = res.result;
+    text = (res.d2r ? 'Download legacy save' : 'Download D2R save');
+  } catch (e) {
+    document.getElementById("output-log").innerText = e.message;
+  }
+
+  const blob = new Blob([result], {type: 'binary/octet-stream'});
+  const url = URL.createObjectURL(blob);
+  const lnk = document.createElement('a');
+  lnk.setAttribute('href', url);
+  lnk.setAttribute('download', file.name);
+  lnk.innerText = text;
+
+  const dl = document.getElementById("output-log");
+  dl.children.length = 0;
+  dl.appendChild(lnk);
+  lnk.click();
+}
+
+function onDrop(e) {
+  debugger;
+  const file = getDropFile(e);
+  if (file) {
+    e.preventDefault();
+    process(file);
+  }
+}
+
+function isDropFile(e) {
+  if (e.dataTransfer.items) {
+    for (let i = 0; i < e.dataTransfer.items.length; ++i) {
+      if (e.dataTransfer.items[i].kind === "file") {
+        return true;
+      }
+    }
+  } if (e.dataTransfer.files.length) {
+    return true;
+  }
+  return false;
+}
+function onDragEnter(e) {
+  e.preventDefault();
+  document.body.classList.add('dropping');
+}
+function onDragOver(e) {
+  if (isDropFile(e)) {
+    e.preventDefault();
+  }
+}
+function onDragLeave(e) {
+  document.body.classList.remove('dropping');
+}
+
+</script>
+<style>
+.dropping {
+  background-color: #eee;
+}
+</style>
+</head>
+<body>
+<h3>D2 <> D2R save file converter</h3>
+<p>Drop .d2s file anywhere on the page</p>
+<p>Save files can be located at C:/Users/<name>/Saved Games/Diablo II</p>
+<p id="output-log"></p>
+<script>
+document.addEventListener("drop", onDrop, true);
+document.addEventListener("dragover", onDragOver, true);
+document.addEventListener("dragenter", onDragEnter, true);
+document.addEventListener("dragleave", onDragLeave, true);
+</script>
+</body>
+</html>
