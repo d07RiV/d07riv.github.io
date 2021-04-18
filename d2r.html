@@ -522,7 +522,7 @@ async function process(file) {
   lnk.innerText = text;
 
   const dl = document.getElementById("output-log");
-  dl.children.length = 0;
+  dl.innerHTML = '';
   dl.appendChild(lnk);
   lnk.click();
 }
