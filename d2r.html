@@ -307,7 +307,7 @@ function parseCharacter(rawInput) {
     }
     for (let i = 0; i < 4; ++i) {
       if (D2R) {
-        dst.bits(baseId.charCodeAt(i) || 32);
+        dst.bits(baseId.charCodeAt(i) || 32, 8);
       } else {
         dst.char(baseId[i] || ' ');
       }
