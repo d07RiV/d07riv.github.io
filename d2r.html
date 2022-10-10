@@ -237,9 +237,9 @@ function parseCharacter(rawInput) {
 
   if (copy32() !== 0xaa55aa55) throw Error('invalid header');
   const version = src.read32();
-  if (version !== 96 && version !== 97) throw Error('unsupported version');
-  const D2R = (version === 97);
-  dst.write32(D2R ? 96 : 97);
+  if (version !== 96 && version !== 97 && version !== 98) throw Error('unsupported version');
+  const D2R = (version >= 97);
+  dst.write32(D2R ? 96 : 98);
 
   skip(179 - 8);
   const mercId = copy32();
@@ -326,9 +326,11 @@ function parseCharacter(rawInput) {
       return;
     }
 
-    const socketedItems = copybits(simple ? 1 : 3);
+    let socketedItems = 0;
 
     if (!simple) {
+      socketedItems = copybits(3);
+
       skipbits(32);
       skipbits(7); // ilvl
       const quality = copybits(4);
@@ -428,6 +430,8 @@ function parseCharacter(rawInput) {
       if (setflags & 8) parseStats(true);
       if (setflags & 16) parseStats(true);
       if (runeword) parseStats();
+    } else {
+      copybits(1);
     }
 
     align();
@@ -455,14 +459,18 @@ function parseCharacter(rawInput) {
     parseItemList(); // corpses
   }
 
-  if (copy16() !== 0x666a) throw Error('invalid hireling header');
-  if (mercId) {
-    parseItemList();
+  if (!src.eof()) {
+    if (copy16() !== 0x666a) throw Error('invalid hireling header');
+    if (mercId) {
+      parseItemList();
+    }
   }
 
-  if (copy16() !== 0x666b) throw Error('invalid iron golem header');
-  if (copy8()) {
-    parseItem();
+  if (!src.eof()) {
+    if (copy16() !== 0x666b) throw Error('invalid iron golem header');
+    if (copy8()) {
+      parseItem();
+    }
   }
 
   if (!src.eof()) throw Error('file too long');
